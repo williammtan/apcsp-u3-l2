@@ -1,0 +1,74 @@
+<!-- 
+Poligote (C Level)
+
+- Create a page Lab02_02 that has 2 input boxes: name, and language. 
+- Add a button for output; The button should call a function named poliglote that:
+- Outputs (on an H2 or a div) a greeting in the selected language: “Hola Lisa”, or “Hello Lisa”, or “Bonjour Lisa” depending on the input language.  Include as many different languages as you can.
+- The output should be “language not recognized” if the user types a language you are not contemplating
+
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Poligote</h1>
+
+    <label>Name: </label>
+    <input id="name">
+
+    <br>
+
+    <p>Language: </p>
+    <input type="radio" name="language" value="english">
+    <label>English</label>
+    <br>
+    <input type="radio" name="language" value="french">
+    <label>French</label>
+    <br>
+    <input type="radio" name="language" value="spanish">
+    <label>Spanish</label>
+    <br>
+    <input type="radio" name="language" value="indonesian">
+    <label>Indonesian</label>
+    <br>
+
+    <button onclick="poligote()">Poligate!</button>
+
+    <br>
+
+    <h2 id="output"></h2>
+</body>
+<script>
+    function poligote() {
+        let language = document.querySelector('input[name="language"]:checked').value; // use XPath to select the checked input; source: https://stackoverflow.com/questions/9618504/how-to-get-the-selected-radio-button-s-value
+        let greeting;
+        switch(language) {
+            case 'english':
+                greeting = "Hello";
+                break;
+            case 'french':
+                greeting = "Bonjour";
+                break;
+            case 'spanish':
+                greeting = "Hola";
+                break;
+            case 'indonesian':
+                greeting = "Halo";
+                break;
+            default:
+                break;
+        }
+        
+        let name = document.getElementById("name").value;
+        let output = document.getElementById("output");
+        output.innerHTML = greeting + " " + name + "!";
+    }
+</script>
+</html>

@@ -1,0 +1,97 @@
+<!-- 
+GPA Calculator (B Level)
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>GPA Calculator</h1>
+
+    <input onchange="calculateGPA(this)" class="grade" id="s1" min="1" max="100" type="number">
+    <label id="ls1"></label>
+    <br>
+    
+    <input onchange="calculateGPA(this)" class="grade" id="s2" min="1" max="100" type="number">
+    <label id="ls2"></label>
+    <br>
+
+    <input onchange="calculateGPA(this)" class="grade" id="s3" min="1" max="100" type="number">
+    <label id="ls3"></label>
+    <br>
+
+    <input onchange="calculateGPA(this)" class="grade" id="s4" min="1" max="100" type="number">
+    <label id="ls4"></label>
+    <br>
+
+    <input onchange="calculateGPA(this)" class="grade" id="s5" min="1" max="100" type="number">
+    <label id="ls5"></label>
+    <br>
+
+    <input onchange="calculateGPA(this)" class="grade" id="s6" min="1" max="100" type="number">
+    <label id="ls6"></label>
+    <br>
+
+    <button onclick="calculateTotalGPA()">Calculate Total</button>
+    <h3 id="totalGPA"></h3>
+
+</body>
+<script>
+    function calculateLetter(percentage) {
+        let grade;
+        if (percentage < 60.0) {
+            grade = "F";
+        } else if (percentage < 70) {
+            grade = "D";
+        } else if (percentage < 80) {
+            grade = "C";
+        } else if (percentage < 85) {
+            grade = "B";
+        } else if (percentage < 90) {
+            grade = "A";
+        } else {
+            grade = "A*"
+        }
+
+        return grade;
+    }
+
+    function calculateGPA(element) {
+        // the onchange will pass itself as an element so we can access the value and id
+        // source: https://stackoverflow.com/questions/3652659/get-the-element-that-triggers-a-javascript-function
+        let labelId = "l" + element.id; // eg: s1 -> ls1
+        let label = document.getElementById(labelId);
+        let percentage = Math.max(Math.min(parseFloat(element.value), 100), 0);
+        element.value = percentage; // cap the max/min
+        let grade = calculateLetter(percentage);
+
+        label.innerHTML = grade;
+    }
+
+    function calculateTotalGPA() {
+        let totalGPAOutput = document.getElementById("totalGPA");
+        let gradeElements = document.getElementsByClassName("grade");
+        let sum = 0;
+        console.log(gradeElements)
+        for(let i=0;i<gradeElements.length;i++) {
+            let val = parseFloat(gradeElements[i].value);
+            if (!val) {
+                let gradeLabel = document.getElementById("l" + gradeElements[i].id);
+                gradeLabel.innerHTML = "fill this in first!";
+                break
+            }
+            sum += val;
+        }
+        
+        let avg = Math.round(sum/6);
+
+        totalGPAOutput.innerHTML = "Final GPA: " + calculateLetter(avg) + " (@" + avg + "%)";
+    }
+</script>
+</html>

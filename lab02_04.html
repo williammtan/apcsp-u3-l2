@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Number checker</h1>
+    <br>
+
+    <div>
+        <label>Number 1: </label>
+        <input id="num1">
+        <br>
+    
+        <label>Number 2: </label>
+        <input id="num2">
+        <br>
+    
+        <label>Number 3: </label>
+        <input id="num3">
+        <br>
+    </div>
+
+    <br>
+
+    <div>
+        <button onclick="productSign()">Product Sign</button>
+        <button onclick="maxValue()">Max Value</button>
+        <button onclick="sort()">Sort</button>
+    </div>
+
+    <br>
+
+    <div>
+        <div id="output"></div>
+    </div>
+</body>
+<script>
+    let num1;
+    let num2;
+    let num3;
+
+    function getNums() {
+        console.log(document.getElementById("num1"));
+        num1 = parseInt(document.getElementById("num1").value);
+        num2 = parseInt(document.getElementById("num2").value);
+        num3 = parseInt(document.getElementById("num3").value);
+    }
+
+    function display(text) {
+        let output = document.getElementById("output");
+        let baseText = `Sample numbers: ${num1}, ${num2}, ${num3} <br> Output: `
+        output.innerHTML = baseText + text;
+    }
+
+    function productSign() {
+        getNums();
+        let product = num1 * num2 * num3;
+        let sign;
+        if (product < 0) {
+            sign = '-';
+        } else {
+            sign = '+';
+        }
+        display("The sign is " + sign);
+    }
+
+    function maxValue() {
+        getNums();
+        let max = Math.max(num1, num2, num3);
+        display(`The largest number is ${max}.`);
+    }
+
+    function sort() {
+        getNums();
+        let numArray = [num1, num2, num3];
+        numArray.sort();
+        display(`Sorted numbers: ${numArray[0]}, ${numArray[1]}, ${numArray[2]}`);
+    }
+</script>
+</html>
